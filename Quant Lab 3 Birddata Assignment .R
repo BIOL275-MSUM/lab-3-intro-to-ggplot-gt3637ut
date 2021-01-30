@@ -11,3 +11,11 @@ birds <- ebird_taxonomy %>%           # start with the ebird_taxonomy data
   as_tibble() %>%                     # tibbles print better in the console
   filter(category == "species")       # remove non-species taxa
 
+ggplot(data = bird_data)
+
+#> 
+#> ── Column specification ────────────────────────────────────────────────────────
+#> cols(
+#>   species = col_character(),
+#>   abundance = col_double()
+#> )
