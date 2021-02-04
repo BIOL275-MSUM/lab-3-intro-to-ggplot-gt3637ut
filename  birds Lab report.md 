@@ -1,3 +1,17 @@
+title:Lab Report 3 birds
+author: Hiba Chaudhry 
+date: Feb/2/21
+output: github_document 
+
+
+Objectives: 
+  
+  #Use the layered grammar of graphics
+  
+  #Create a graph showing the distribution of a single variable
+  
+  #Set the image width for an R Markdown code chunk
+
 
 # load packages  ----------------------------------------------------------
 
@@ -6,11 +20,13 @@ library(tidyverse)
 firefly_data <- read_csv("https://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter02/chap02q19FireflySpermatophoreMass.csv")
 firefly_data
 ggplot(data = firefly_data)
+#To read the data 
 
 ggplot(data = firefly_data) + geom_histogram(mapping = aes(x= spermatophoreMass))
+#For making a histogram 
 
 ggplot(data = firefly_data) +
-  geom_histogram(mapping = aes(x = spermatophoreMass),
+  geom_histogram(mapping = aes(x = spermatophoreMass), 
                  fill = "#C5351B" , color = "black") +
   labs(x = "Spermatophore Mass", y = "Count") +
   theme_classic() + 
@@ -18,7 +34,8 @@ ggplot(data = firefly_data) +
     axis.title = element_text(face = "bold"),
     axis.text = element_text(color = "black", size = rel(1))
   )
-rlang::last_error()
+#Giving the x and y values, changing the color, making the graph look presentable 
+
 
 
   
