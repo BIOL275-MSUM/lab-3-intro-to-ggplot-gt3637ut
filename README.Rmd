@@ -1,25 +1,98 @@
 ---
 title: "Lab 3: Introduction to ggplot"
-author: "___"
-date: "`r format(Sys.Date())`"
+author: "Hiba Chaudhry"
+date: "`4/5/2021`"
 output: github_document
 ---
 
-> INSTRUCTIONS: REMOVE THIS LINE AND REPLACE ____ WITH YOUR OWN TEXT
+> This is Lab 3 of Quant Bio. 
 
-Welcome to my Lab 2 repository for Quantitative Biology BIOL 275 at MSUM.
+Welcome to my Lab 3 repository for Quantitative Biology BIOL 275 at MSUM.
 
 ## Lab objectives
 
 The objectives of this lab are:
 
-- ___
-- ___
+Use the layered grammar of graphics:
+
+Create a blank graph using the ggplot() function
+  Add geometric objects to a graph
+  Define an aesthetic mapping for a graph
+  Add labels to a graph
+  Fix some common styling
+  
+Create a graph showing the distribution of a single variable
+  Create a bar chart for a categorical variable using the geom_col() and geom_bar() functions
+  Arrange the categories in a bar chart by frequency
+  Create a histogram for a numerical variable using the geom_histogram() function
+  Choose and set appropriate histogram bin widths
+  
+Set the image width for an R Markdown code chunk
 
 ## Repository contents
 
 The repository contains the following scripts:
 
 - [Lab Report 3](lab-report.md)
-- ___
 
+
+
+
+
+
+
+
+```{r}
+# load packages -----------------------------------------------------------
+#install.packages(c("nycflights13", "gapminder", "Lahman"))
+
+library(nycflights13)
+library(tidyverse)
+
+library(auk)                          # load the auk package
+birds <- ebird_taxonomy %>%           # start with the ebird_taxonomy data
+  as_tibble() %>%                     # tibbles print better in the console
+  filter(category == "species")       # remove non-species taxa
+  
+```
+
+#Q1: Print a table containing only species NOT in the Order Passeriformes. Include all columns.
+```{r}
+filter(birds, order != "Passeriformes")
+```
+
+#Q2: Print a table containing only species in the Order Passeriformes. Include all columns.
+```{r}
+# print a table of passeriformes
+#filter(birds, order == "Passeriformes")
+```
+
+#Q3:Print a table containing all species. Only the variables Species Code, Scientific Name, and Common Name should be in the final table.
+```{r}
+select(birds, species_code, scientific_name,common_name)
+```
+
+#Q4:Print a table with all species in the Order Passeriformes whose common name starts with the word “Common”. Species should be in reverse taxonomic order (taxon_order variable). Only the variables Species Code, Scientific Name, and Common Name should be in the final table.
+```{r}
+filter(birds, order == "Passeriformes")
+Passeriformes<-filter(birds, order == "Passeriformes") 
+filter(Passeriformes, str_detect(common_name, "Common"))
+Y<-arrange(Passeriformes,desc(taxon_order))
+select(Y, species_code, scientific_name, common_name)
+```
+
+#Q5:Print a table containing species with “Warbler” in the common name. Include all columns.
+```{r}
+# Warbler -----------------------------------------------------------------
+Warbler <- filter(birds, str_detect(common_name, "Warbler"))
+```
+
+#Q6:Print a table with two columns: family and n, the number of species in that family whose name contains “Warbler”
+```{r}
+# 2 Columns: Warbler and family  ------------------------------------------
+count(Warbler, family)
+```
+
+
+
+sessioninfo::session_info() 
